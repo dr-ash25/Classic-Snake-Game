@@ -93,8 +93,6 @@ body {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-    overscroll-behavior: none;
-    overflow: hidden;
 }
 
 #gameCanvas {

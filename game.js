@@ -335,11 +335,17 @@ function setupControls() {
     let touchStartY = 0;
 
     canvas.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevent scrolling
         touchStartX = e.touches[0].clientX;
         touchStartY = e.touches[0].clientY;
-    }, { passive: true });
+    }, { passive: false });
+
+    canvas.addEventListener('touchmove', (e) => {
+        e.preventDefault(); // Prevent scrolling during swipe
+    }, { passive: false });
 
     canvas.addEventListener('touchend', (e) => {
+        e.preventDefault();
         if (isGameOver) {
             resetGame();
             startGame();
@@ -355,7 +361,7 @@ function setupControls() {
         const absDx = Math.abs(dx);
         const absDy = Math.abs(dy);
 
-        if (absDx > 30 || absDy > 30) {
+        if (absDx > 20 || absDy > 20) {
             if (absDx > absDy) {
                 // Horizontal swipe
                 if (dx > 0 && direction !== 'left') {
@@ -372,7 +378,7 @@ function setupControls() {
                 }
             }
         }
-    }, { passive: true });
+    }, { passive: false });
 
     // Restart button
     document.getElementById('restartBtn').addEventListener('click', () => {

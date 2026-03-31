@@ -330,38 +330,51 @@ function setupControls() {
         });
     });
 
-    // Touch swipe controls
+    // Touch swipe controls on game area
     let touchStartX = 0;
     let touchStartY = 0;
+    let shouldPreventTouch = false; // Track if this touch sequence should be handled
+    const gameArea = document.querySelector('.game-area');
 
-    canvas.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Prevent scrolling
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }, { passive: false });
+    function isInteractiveElement(target) {
+        // Allow buttons and inputs to work normally (don't prevent default)
+        return target.closest('button') || target.closest('input') || target.closest('select');
+    }
 
-    canvas.addEventListener('touchmove', (e) => {
-        e.preventDefault(); // Prevent scrolling during swipe
-    }, { passive: false });
-
-    canvas.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        if (isGameOver) {
-            resetGame();
-            startGame();
-            return;
+    gameArea.addEventListener('touchstart', (e) => {
+        shouldPreventTouch = !isInteractiveElement(e.target);
+        if (shouldPreventTouch) {
+            e.preventDefault();
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
         }
+    }, { passive: false });
 
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
+    gameArea.addEventListener('touchmove', (e) => {
+        if (shouldPreventTouch) {
+            e.preventDefault();
+        }
+    }, { passive: false });
 
-        const dx = touchEndX - touchStartX;
-        const dy = touchEndY - touchStartY;
+    gameArea.addEventListener('touchend', (e) => {
+        if (shouldPreventTouch) {
+            e.preventDefault();
+            if (isGameOver) {
+                resetGame();
+                startGame();
+                return;
+            }
 
-        const absDx = Math.abs(dx);
-        const absDy = Math.abs(dy);
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
 
-        if (absDx > 20 || absDy > 20) {
+            const dx = touchEndX - touchStartX;
+            const dy = touchEndY - touchStartY;
+
+            const absDx = Math.abs(dx);
+            const absDy = Math.abs(dy);
+
+            if (absDx > 10 || absDy > 10) {
             if (absDx > absDy) {
                 // Horizontal swipe
                 if (dx > 0 && direction !== 'left') {

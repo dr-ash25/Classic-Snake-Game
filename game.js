@@ -521,16 +521,22 @@ function setupDifficulty() {
 
     // Set grid sizes for each difficulty
     const gridSizes = {
-        easy: 15,
+        veryeasy: 30,
+        easy: 25,
         medium: 20,
-        hard: 10
+        hard: 10,
+        veryhard: 8,
+        extreme: 6
     };
 
     // Set default wrap modes for each difficulty
     const defaultWrapByDifficulty = {
+        veryeasy: true,
         easy: true,
         medium: true,
-        hard: false
+        hard: false,
+        veryhard: false,
+        extreme: false
     };
 
     // Initialize from saved settings or defaults

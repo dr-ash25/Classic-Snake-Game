@@ -330,7 +330,7 @@ function setupControls() {
         });
     });
 
-    // Touch swipe controls on canvas
+    // Touch swipe controls
     let touchStartX = 0;
     let touchStartY = 0;
 

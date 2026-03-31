@@ -303,10 +303,11 @@ function setupControls() {
         }
     });
 
-    // Mobile button controls
+    // Mobile button controls - use pointerdown for immediate response
     const arrowBtns = document.querySelectorAll('.arrow-btn');
     arrowBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        const handleDirection = (e) => {
+            e.preventDefault();
             const dir = btn.dataset.direction;
             if (isGameOver) {
                 resetGame();
@@ -328,7 +329,11 @@ function setupControls() {
                     if (direction !== 'left') nextDirection = 'right';
                     break;
             }
-        });
+        };
+
+        btn.addEventListener('pointerdown', handleDirection);
+        // Also keep click as fallback for accessibility
+        btn.addEventListener('click', handleDirection);
     });
 
     // Touch swipe controls

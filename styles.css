@@ -129,7 +129,7 @@ body {
 .game-over p {
     font-size: 1.2rem;
     margin-bottom: 20px;
-    color: #306230;
+    color: #e0e0e0;
 }
 
 #restartBtn {
@@ -163,10 +163,11 @@ body {
 }
 
 .controls-panel h3 {
-    color: #8bac0f;
+    color: #9bc71f;
     margin-bottom: 15px;
     text-align: center;
     font-size: 1.2rem;
+    text-shadow: 0 0 5px rgba(155, 199, 31, 0.3);
 }
 
 .difficulty-section,
@@ -180,14 +181,15 @@ body {
 }
 
 .difficulty-section label {
-    color: #306230;
+    color: #e0e0e0;
     font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .difficulty-section select {
-    background: #1a1a1a;
-    color: #8bac0f;
-    border: 2px solid #306230;
+    background: #143d14;
+    color: #ffffff;
+    border: 2px solid #4a7c4a;
     padding: 6px 12px;
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
@@ -197,7 +199,12 @@ body {
 
 .difficulty-section select:focus {
     outline: none;
-    border-color: #8bac0f;
+    border-color: #9bc71f;
+}
+
+.difficulty-section select option {
+    background: #0f380f;
+    color: #e0e0e0;
 }
 
 .toggle-label {
@@ -206,8 +213,9 @@ body {
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    color: #306230;
+    color: #e0e0e0;
     font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .toggle-label input[type="checkbox"] {
@@ -231,7 +239,8 @@ body {
     align-items: center;
     gap: 5px;
     font-size: 0.9rem;
-    color: #306230;
+    color: #e0e0e0;
+    font-weight: bold;
 }
 
 .color-controls input[type="color"] {
@@ -254,8 +263,9 @@ body {
 }
 
 .preset-label {
-    color: #306230;
+    color: #9bc71f;
     font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .preset-btn {
@@ -278,7 +288,10 @@ body {
 .instructions {
     text-align: center;
     font-size: 0.85rem;
-    color: #306230;
+    color: #b0b0b0;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #306230;
 }
 
 .instructions p {
@@ -286,7 +299,8 @@ body {
 }
 
 .instructions strong {
-    color: #8bac0f;
+    color: #9bc71f;
+    font-weight: bold;
 }
 
 .mobile-controls {

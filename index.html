@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake Game - Nokia Classic</title>
+    <meta name="theme-color" content="#8bac0f">
+    <meta name="description" content="Classic Nokia-style Snake game with customizable colors, difficulty levels, and wrap mode">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <h1>SNAKE</h1>
+                <button id="fullscreenBtn" class="fullscreen-btn">
+                    <span class="fullscreen-icon">⛶</span>
+                </button>
+            </div>
+            <div class="score-display">
+                <span>Score: <span id="score">0</span></span>
+                <span>High Score: <span id="highScore">0</span></span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="600" height="600"></canvas>
+
+            <div id="gameOver" class="game-over hidden">
+                <h2>GAME OVER</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <button id="restartBtn">PLAY AGAIN</button>
+            </div>
+        </div>
+
+        <div class="controls-panel">
+            <h3>Game Settings</h3>
+
+            <div class="difficulty-section">
+                <label>Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy (15x15, Wrap)</option>
+                    <option value="medium" selected>Medium (20x20, Wrap)</option>
+                    <option value="hard">Hard (10x10, Wall)</option>
+                </select>
+            </div>
+
+            <div class="boundary-section">
+                <label class="toggle-label">
+                    <input type="checkbox" id="wrapToggle" checked>
+                    <span>Wrap around edges (teleport)</span>
+                </label>
+            </div>
+
+            <h3>Customize Colors</h3>
+            <div class="color-controls">
+                <label>
+                    Background:
+                    <input type="color" id="bgColorPicker" value="#8bac0f">
+                </label>
+                <label>
+                    Snake:
+                    <input type="color" id="snakeColorPicker" value="#0f380f">
+                </label>
+                <label>
+                    Food:
+                    <input type="color" id="foodColorPicker" value="#306230">
+                </label>
+            </div>
+
+            <div class="preset-colors">
+                <span class="preset-label">Presets:</span>
+                <button class="preset-btn" data-bg="#8bac0f" data-snake="#0f380f" data-food="#306230">Classic Green</button>
+                <button class="preset-btn" data-bg="#000000" data-snake="#00ff00" data-food="#ff0000">Matrix</button>
+                <button class="preset-btn" data-bg="#1a1a2e" data-snake="#00d4ff" data-food="#ff6b6b">Ocean</button>
+                <button class="preset-btn" data-bg="#2d2d2d" data-snake="#ffd93d" data-food="#ff6b6b">Sunset</button>
+            </div>
+
+            <div class="instructions">
+                <h3>Controls</h3>
+                <p><strong>Desktop:</strong> Arrow keys or WASD</p>
+                <p><strong>Mobile:</strong> Touch arrow buttons or swipe</p>
+                <p><strong>Pause:</strong> Space or P</p>
+            </div>
+        </div>
+
+        <div class="mobile-controls" id="mobileControls">
+            <button class="arrow-btn" data-direction="up">▲</button>
+            <div class="horizontal-btns">
+                <button class="arrow-btn" data-direction="left">◀</button>
+                <button class="arrow-btn" data-direction="down">▼</button>
+                <button class="arrow-btn" data-direction="right">▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('[Service Worker] Registered:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('[Service Worker] Registration failed:', error);
+                    });
+            });
+        }
+    </script>
+
+    <script src="game.js"></script>
+</body>
+</html>

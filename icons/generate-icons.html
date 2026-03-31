@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Icon Generator</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #1a1a1a; color: #e0e0e0; }
+        .icon-preview { margin: 20px 0; text-align: center; }
+        .icon-preview canvas { border: 2px solid #333; margin: 5px; }
+        button { background: #8bac0f; color: #0f380f; border: none; padding: 10px 20px; margin: 10px; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Snake Game PWA Icon Generator</h1>
+    <p>This page generates all required icon PNGs for the PWA manifest.</p>
+    <button onclick="generateIcons()">Generate and Download Icons</button>
+    <div id="previews"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+
+        function drawIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            // Scale factor from 512 to size
+            const scale = size / 512;
+
+            // Background
+            ctx.fillStyle = '#1a1a1a';
+            ctx.beginPath();
+            ctx.roundRect(0, 0, size, size, size * 0.12);
+            ctx.fill();
+
+            // Snake path
+            ctx.strokeStyle = '#8bac0f';
+            ctx.lineWidth = 30 * scale;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.arc(256 * scale, 256 * scale, 106 * scale, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Dot
+            ctx.fillStyle = '#306230';
+            ctx.beginPath();
+            ctx.arc(256 * scale, 256 * scale, 20 * scale, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Head segments
+            ctx.fillStyle = '#0f380f';
+
+            // Top segment
+            ctx.fillRect(
+                248 * scale,
+                (200 - 15) * scale,
+                16 * scale,
+                36 * scale
+            );
+
+            // Bottom segments
+            ctx.fillRect(
+                248 * scale,
+                236 * scale,
+                16 * scale,
+                36 * scale
+            );
+
+            ctx.fillRect(
+                (200 - 15) * scale,
+                248 * scale,
+                36 * scale,
+                16 * scale
+            );
+
+            ctx.fillRect(
+                269 * scale,
+                248 * scale,
+                36 * scale,
+                16 * scale
+            );
+
+            // Dots on sides
+            ctx.beginPath();
+            ctx.arc(150 * scale, 256 * scale, 12 * scale, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(362 * scale, 256 * scale, 12 * scale, 0, Math.PI * 2);
+            ctx.fill();
+
+            return canvas;
+        }
+
+        function generateIcons() {
+            const container = document.getElementById('previews');
+            container.innerHTML = '<h2>Icon Previews (right-click to save):</h2>';
+
+            sizes.forEach(size => {
+                const canvas = drawIcon(size);
+                const wrapper = document.createElement('div');
+                wrapper.className = 'icon-preview';
+
+                const label = document.createElement('p');
+                label.textContent = `${size}×${size}`;
+                wrapper.appendChild(label);
+                wrapper.appendChild(canvas);
+
+                container.appendChild(wrapper);
+            });
+        }
+
+        // Auto-generate previews
+        window.onload = generateIcons;
+    </script>
+</body>
+</html>

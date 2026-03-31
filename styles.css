@@ -1,0 +1,465 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    user-select: none;
+    -webkit-user-select: none;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #8bac0f;
+    letter-spacing: 8px;
+    text-shadow: 0 0 10px #8bac0f;
+    margin: 0;
+}
+
+.fullscreen-btn {
+    position: absolute;
+    right: 0;
+    background: transparent;
+    border: 2px solid #306230;
+    color: #8bac0f;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.fullscreen-btn:hover {
+    background: rgba(139, 172, 15, 0.2);
+    border-color: #8bac0f;
+    transform: scale(1.1);
+}
+
+.fullscreen-btn:active {
+    transform: scale(0.95);
+}
+
+.score-display {
+    display: flex;
+    justify-content: space-around;
+    background: #0f380f;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #306230;
+    font-size: 1rem;
+}
+
+.score-display span:first-child {
+    color: #8bac0f;
+}
+
+.game-area {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#gameCanvas {
+    border: 4px solid #8bac0f;
+    border-radius: 4px;
+    background-color: #8bac0f;
+    box-shadow: 0 0 20px rgba(139, 172, 15, 0.3);
+    display: block;
+    width: 600px;
+    height: 600px;
+}
+
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(15, 56, 15, 0.95);
+    padding: 30px 40px;
+    border-radius: 10px;
+    border: 3px solid #8bac0f;
+    text-align: center;
+    z-index: 10;
+}
+
+.game-over.hidden {
+    display: none;
+}
+
+.game-over h2 {
+    color: #8bac0f;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.game-over p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #306230;
+}
+
+#restartBtn {
+    background: #8bac0f;
+    color: #0f380f;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s;
+}
+
+#restartBtn:hover {
+    background: #9bc71f;
+    transform: scale(1.05);
+}
+
+#restartBtn:active {
+    transform: scale(0.95);
+}
+
+.controls-panel {
+    background: #0f380f;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #306230;
+    margin-bottom: 15px;
+}
+
+.controls-panel h3 {
+    color: #8bac0f;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.difficulty-section,
+.boundary-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.difficulty-section label {
+    color: #306230;
+    font-size: 0.9rem;
+}
+
+.difficulty-section select {
+    background: #1a1a1a;
+    color: #8bac0f;
+    border: 2px solid #306230;
+    padding: 6px 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.difficulty-section select:focus {
+    outline: none;
+    border-color: #8bac0f;
+}
+
+.toggle-label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #306230;
+    font-size: 0.9rem;
+}
+
+.toggle-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #8bac0f;
+}
+
+.color-controls {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.color-controls label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: #306230;
+}
+
+.color-controls input[type="color"] {
+    width: 50px;
+    height: 35px;
+    border: 2px solid #8bac0f;
+    border-radius: 5px;
+    cursor: pointer;
+    background: transparent;
+    padding: 2px;
+}
+
+.preset-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.preset-label {
+    color: #306230;
+    font-size: 0.9rem;
+}
+
+.preset-btn {
+    background: transparent;
+    color: #8bac0f;
+    border: 1px solid #306230;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.preset-btn:hover {
+    background: rgba(139, 172, 15, 0.2);
+    border-color: #8bac0f;
+}
+
+.instructions {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #306230;
+}
+
+.instructions p {
+    margin: 5px 0;
+}
+
+.instructions strong {
+    color: #8bac0f;
+}
+
+.mobile-controls {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.horizontal-btns {
+    display: flex;
+    gap: 5px;
+}
+
+.arrow-btn {
+    width: 60px;
+    height: 50px;
+    font-size: 1.5rem;
+    background: #0f380f;
+    color: #8bac0f;
+    border: 2px solid #306230;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s;
+}
+
+.arrow-btn:active {
+    background: #8bac0f;
+    color: #0f380f;
+    transform: scale(0.95);
+}
+
+@media (max-width: 500px) {
+    .mobile-controls {
+        display: flex;
+    }
+
+    #gameCanvas {
+        width: 90vmin;
+        height: 90vmin;
+    }
+
+    .header h1 {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+    }
+
+    .color-controls {
+        justify-content: center;
+    }
+
+    .preset-colors {
+        gap: 5px;
+    }
+
+    .preset-btn {
+        padding: 5px 8px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .mobile-controls {
+        display: flex;
+    }
+}
+
+/* Fullscreen styles */
+:fullscreen .container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+:fullscreen .header {
+    width: 100%;
+    max-width: 800px;
+}
+
+:fullscreen .header-top {
+    width: 100%;
+}
+
+:fullscreen .header h1 {
+    font-size: 3rem;
+}
+
+:fullscreen .game-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: calc(100vh - 200px);
+}
+
+:fullscreen #gameCanvas {
+    max-width: 95vmin;
+    max-height: 95vmin;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+}
+
+:fullscreen .controls-panel {
+    max-width: 800px;
+    width: 100%;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+:fullscreen .mobile-controls {
+    width: 100%;
+    max-width: 300px;
+}
+
+/* Older vendor prefixes for broader compatibility */
+:-webkit-full-screen .container {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+:-webkit-full-screen .header {
+    width: 100%;
+    max-width: 800px;
+}
+
+:-webkit-full-screen .header-top {
+    width: 100%;
+}
+
+:-webkit-full-screen .header h1 {
+    font-size: 3rem;
+}
+
+:-webkit-full-screen .game-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-height: calc(100vh - 200px);
+}
+
+:-webkit-full-screen #gameCanvas {
+    max-width: 95vmin;
+    max-height: 95vmin;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+}
+
+:-webkit-full-screen .controls-panel {
+    max-width: 800px;
+    width: 100%;
+    max-height: 30vh;
+    overflow-y: auto;
+}
+
+:-webkit-full-screen .mobile-controls {
+    width: 100%;
+    max-width: 300px;
+}

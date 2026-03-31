@@ -36,53 +36,57 @@
         </div>
 
         <div class="controls-panel">
-            <h3>Game Settings</h3>
-
-            <div class="difficulty-section">
-                <label>Difficulty:</label>
-                <select id="difficulty">
-                    <option value="easy">Easy (15x15, Wrap)</option>
-                    <option value="medium" selected>Medium (20x20, Wrap)</option>
-                    <option value="hard">Hard (10x10, Wall)</option>
-                </select>
+            <div class="panel-header" id="panelHeader">
+                <h3>Game Settings & Colors</h3>
+                <button class="collapse-btn" id="collapseBtn">▼</button>
             </div>
+            <div class="panel-content" id="panelContent">
+                <div class="difficulty-section">
+                    <label>Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="easy">Easy (15x15, Wrap)</option>
+                        <option value="medium" selected>Medium (20x20, Wrap)</option>
+                        <option value="hard">Hard (10x10, Wall)</option>
+                    </select>
+                </div>
 
-            <div class="boundary-section">
-                <label class="toggle-label">
-                    <input type="checkbox" id="wrapToggle" checked>
-                    <span>Wrap around edges (teleport)</span>
-                </label>
-            </div>
+                <div class="boundary-section">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="wrapToggle" checked>
+                        <span>Wrap around edges (teleport)</span>
+                    </label>
+                </div>
 
-            <h3>Customize Colors</h3>
-            <div class="color-controls">
-                <label>
-                    Background:
-                    <input type="color" id="bgColorPicker" value="#8bac0f">
-                </label>
-                <label>
-                    Snake:
-                    <input type="color" id="snakeColorPicker" value="#0f380f">
-                </label>
-                <label>
-                    Food:
-                    <input type="color" id="foodColorPicker" value="#306230">
-                </label>
-            </div>
+                <h3>Customize Colors</h3>
+                <div class="color-controls">
+                    <label>
+                        Background:
+                        <input type="color" id="bgColorPicker" value="#8bac0f">
+                    </label>
+                    <label>
+                        Snake:
+                        <input type="color" id="snakeColorPicker" value="#0f380f">
+                    </label>
+                    <label>
+                        Food:
+                        <input type="color" id="foodColorPicker" value="#306230">
+                    </label>
+                </div>
 
-            <div class="preset-colors">
-                <span class="preset-label">Presets:</span>
-                <button class="preset-btn" data-bg="#8bac0f" data-snake="#0f380f" data-food="#306230">Classic Green</button>
-                <button class="preset-btn" data-bg="#000000" data-snake="#00ff00" data-food="#ff0000">Matrix</button>
-                <button class="preset-btn" data-bg="#1a1a2e" data-snake="#00d4ff" data-food="#ff6b6b">Ocean</button>
-                <button class="preset-btn" data-bg="#2d2d2d" data-snake="#ffd93d" data-food="#ff6b6b">Sunset</button>
-            </div>
+                <div class="preset-colors">
+                    <span class="preset-label">Presets:</span>
+                    <button class="preset-btn" data-bg="#8bac0f" data-snake="#0f380f" data-food="#306230">Classic Green</button>
+                    <button class="preset-btn" data-bg="#000000" data-snake="#00ff00" data-food="#ff0000">Matrix</button>
+                    <button class="preset-btn" data-bg="#1a1a2e" data-snake="#00d4ff" data-food="#ff6b6b">Ocean</button>
+                    <button class="preset-btn" data-bg="#2d2d2d" data-snake="#ffd93d" data-food="#ff6b6b">Sunset</button>
+                </div>
 
-            <div class="instructions">
-                <h3>Controls</h3>
-                <p><strong>Desktop:</strong> Arrow keys or WASD</p>
-                <p><strong>Mobile:</strong> Touch arrow buttons or swipe</p>
-                <p><strong>Pause:</strong> Space or P</p>
+                <div class="instructions">
+                    <h3>Controls</h3>
+                    <p><strong>Desktop:</strong> Arrow keys or WASD</p>
+                    <p><strong>Mobile:</strong> Touch arrow buttons or swipe</p>
+                    <p><strong>Pause:</strong> Space or P</p>
+                </div>
             </div>
         </div>
 

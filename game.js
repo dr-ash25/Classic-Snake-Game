@@ -45,6 +45,7 @@ function init() {
     setupColorPickers();
     setupDifficulty();
     setupFullscreen();
+    setupCollapsiblePanel();
 
     // Handle canvas sizing and scaling
     handleHiDPICanvas();
@@ -389,6 +390,47 @@ function setupFullscreen() {
     // Listen for fullscreen changes (escape key, etc)
     document.addEventListener('fullscreenchange', updateFullscreenButton);
     document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+}
+
+function setupCollapsiblePanel() {
+    const panelHeader = document.getElementById('panelHeader');
+    const panelContent = document.getElementById('panelContent');
+    const collapseBtn = document.getElementById('collapseBtn');
+
+    // Check saved state from localStorage
+    const isCollapsed = localStorage.getItem('controlsPanelCollapsed') === 'true';
+
+    if (isCollapsed) {
+        panelContent.classList.add('hidden');
+        collapseBtn.classList.add('collapsed');
+        collapseBtn.classList.remove('expanded');
+    } else {
+        collapseBtn.classList.add('expanded');
+        collapseBtn.classList.remove('collapsed');
+    }
+
+    panelHeader.addEventListener('click', (e) => {
+        // Don't toggle if clicking on interactive elements inside the header
+        if (e.target.closest('button, input, select')) {
+            return;
+        }
+
+        const isHidden = panelContent.classList.toggle('hidden');
+        collapseBtn.classList.toggle('collapsed');
+        collapseBtn.classList.toggle('expanded');
+
+        // Save state to localStorage
+        localStorage.setItem('controlsPanelCollapsed', isHidden);
+    });
+
+    // Allow button to toggle directly
+    collapseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = panelContent.classList.toggle('hidden');
+        collapseBtn.classList.toggle('collapsed');
+        collapseBtn.classList.remove('expanded');
+        localStorage.setItem('controlsPanelCollapsed', isHidden);
+    });
 }
 
 function toggleFullscreen() {

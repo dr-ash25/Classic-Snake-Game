@@ -156,18 +156,71 @@ body {
 
 .controls-panel {
     background: #0f380f;
-    padding: 20px;
+    padding: 0;
     border-radius: 10px;
     border: 2px solid #306230;
     margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.controls-panel h3 {
+.controls-panel.collapsed {
+    padding: 0;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    user-select: none;
+    background: rgba(139, 172, 15, 0.05);
+    transition: background 0.2s ease;
+}
+
+.panel-header:hover {
+    background: rgba(139, 172, 15, 0.1);
+}
+
+.panel-header h3 {
     color: #9bc71f;
-    margin-bottom: 15px;
-    text-align: center;
+    margin: 0;
     font-size: 1.2rem;
     text-shadow: 0 0 5px rgba(155, 199, 31, 0.3);
+}
+
+.collapse-btn {
+    background: transparent;
+    border: none;
+    color: #8bac0f;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.collapse-btn.expanded {
+    transform: rotate(0deg);
+}
+
+.collapse-btn.collapsed {
+    transform: rotate(-90deg);
+}
+
+.panel-content {
+    max-height: 1000px;
+    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+    padding: 0 20px 20px 20px;
+}
+
+.panel-content.hidden {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .difficulty-section,
@@ -416,6 +469,10 @@ body {
 :fullscreen .controls-panel {
     max-width: 800px;
     width: 100%;
+    overflow: visible;
+}
+
+:fullscreen .panel-content {
     max-height: 30vh;
     overflow-y: auto;
 }
@@ -469,6 +526,10 @@ body {
 :-webkit-full-screen .controls-panel {
     max-width: 800px;
     width: 100%;
+    overflow: visible;
+}
+
+:-webkit-full-screen .panel-content {
     max-height: 30vh;
     overflow-y: auto;
 }
